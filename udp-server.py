@@ -34,5 +34,15 @@ while True:
 
     # 受信したデータをそのまま送信元に返す
     if data:
-        sent = sock.sendto(data, address)
+        response = ""
+        if data == b'1':
+            response = "お大事にしてください。"
+        elif data == b'2':
+            response = "へえ。"
+        elif data == b'3':
+            response = "それは良かったです！"
+        else:
+            response = "無効な選択肢です。"
+
+        sent = sock.sendto(response.encode(), address)
         print('sent {} bytes back to {}'.format(sent, address))
