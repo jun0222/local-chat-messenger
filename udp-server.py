@@ -51,7 +51,7 @@ while True:
 
         # ランダムな占いや絵文字を追加
         random_message = fake.sentence() + " " + random.choice(["😊", "🌟", "🍀", "🎉"])
-        response += " " + random_message
+        formatted_response = f"入力に対するメッセージ: {response}\nfaker生成の文字列+絵文字: {random_message}"
 
-        sent = sock.sendto(response.encode('utf-8'), address)
+        sent = sock.sendto(formatted_response.encode('utf-8'), address)
         print('sent {} bytes back to {}'.format(sent, address))
