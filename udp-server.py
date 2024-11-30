@@ -1,5 +1,10 @@
 import socket
 import os
+import faker
+import random
+
+# faker.Fakerクラスのインスタンスを作成
+fake = faker.Faker()
 
 # socket.socket関数で新規ソケット作成
 # AF_UNIXはUNIXドメインソケット、SOCK_DGRAMはUDPソケット
@@ -44,5 +49,9 @@ while True:
         else:
             response = "無効な選択肢です。"
 
-        sent = sock.sendto(response.encode(), address)
+        # ランダムな占いや絵文字を追加
+        random_message = fake.sentence() + " " + random.choice(["😊", "🌟", "🍀", "🎉"])
+        response += " " + random_message
+
+        sent = sock.sendto(response.encode('utf-8'), address)
         print('sent {} bytes back to {}'.format(sent, address))
